@@ -71,8 +71,8 @@ def execute(content):
         #alternative (untested probably recommended):
         '''
         response = requests.get(url)
-        response.raise_for_status()  # Raises an error for bad responses
-        data_str = response.text  # Automatically decodes to string
+        response.raise_for_status() 
+        data_str = response.text 
         '''
         print("Done. Encoding...")
         data_str = data.decode('utf-8')    # I recommend using json decode, bcus this will probably only work for like pastebin lol
