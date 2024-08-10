@@ -15,8 +15,8 @@ def generateKey(length=8):
     key = ''.join([str(random.randint(0, 9)) for _ in range(length)])
     return key
 
-scriptFileName = "script.txt" # change this as you want
-keyFileName = "" # key is optional, used to make it easy
+scriptFileName = "script.txt" # don't change
+keyFileName = "key.txt" # key is optional, used to make it easy for re-execution of the same script
 
 if not os.path.exists(scriptFileName): 
     print("Creating script file...")
@@ -79,8 +79,9 @@ def execute(content):
         print("Got data. Writing...")
         print("Creating key...")
         generateKey()
-        print("Writing script...")
         writeFile = open("key.txt", "w")
+        writeFile.write(key) 
+        print("Writing script...")
         writeFile = open("script.txt", "w")
         writeFile.write(data_str)
         writeFile.close()
