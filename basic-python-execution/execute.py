@@ -2,24 +2,38 @@ import os
 import time
 import subprocess 
 import socket
+import random # for key
 import re
-import requests #just incase u use the alternative http method on like 58 or smt
+import requests #just incase u use the alternative http method on like 70 or smt
 from flask import Flask, request
 from urllib.request import urlopen
 
 def getappend(filename): # it writes, no appends lol
     return os.path.getmtime(filename)
 
+def generateKey(length=8):
+    key = ''.join([str(random.randint(0, 9)) for _ in range(length)])
+    return key
+
 scriptFileName = "script.txt" # change this as you want
 keyFileName = "" # key is optional, used to make it easy
 
 if not os.path.exists(scriptFileName): 
     print("Creating script file...")
-    with open(scriptFileName, "x") as script: # we use 'x' so that we dont need a script.txt file to start with, if it doesnt exist, a new one is created
+    with open(scriptFileName, "x"): # we use 'x' so that we dont need a script.txt file to start with, if it doesnt exist, a new one is created
         pass
     print("Done.")
 else:
     print("Script file already exists.")
+
+if not os.path.exists(keyFileName): 
+    print("Creating key file...")
+    with open(keyFileName, "x"): 
+        pass
+    print("Done.")
+else:
+    print("Key file already exists.")
+
 
 def checkPort(port):    # thank god for socket docs
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -63,6 +77,10 @@ def execute(content):
         print("Done. Encoding...")
         data_str = data.decode('utf-8')    # I recommend using json decode, bcus this will probably only work for like pastebin lol
         print("Got data. Writing...")
+        print("Creating key...")
+        generateKey()
+        print("Writing script...")
+        writeFile = open("key.txt", "w")
         writeFile = open("script.txt", "w")
         writeFile.write(data_str)
         writeFile.close()
