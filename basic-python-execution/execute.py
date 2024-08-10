@@ -72,5 +72,6 @@ def execute(content):
         writeFile.write(content)
         writeFile.close()
 
+# IMPORTANT!1!1!!!1!!1!!1!:    make sure that something is reading the script file and executing it! ill create a py script that does that for example, but whatever you want to read it has to have access to read from localhost otherwise it will ofc not work.
 
 # This is where you run your external exec ui, and use the functions. DM me for help or smt Discord: physics1514_ byee
